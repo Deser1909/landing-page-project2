@@ -1,0 +1,207 @@
+/* ---- Fonts ---- */
+
+
+@font-face
+{
+	font-family: 'Grotesque';
+	src: url(BasementGrotesque-Black_v1.202.otf) format('opentype');
+}
+
+@font-face
+{
+	font-family: 'Ygro';
+	src: url(YgroSansBeta-Medium.woff2) format('woff2');
+}
+
+
+/* ---- Main ----*/
+
+
+html
+{
+	height: 100vh;
+	overflow: hidden;
+	scroll-behavior: smooth;
+	
+}
+
+
+body
+{	
+	
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	width: 100vw;
+	max-width: 100%;
+	perspective: 1px;
+	transform-style: preserve-3d;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+
+}
+
+
+/* ---- Parallax ---- */
+
+
+.full-screen
+{
+	height: 100vh;
+	width: 100vw;
+}
+
+div h1
+{
+	color: white;
+	font-family: 'Grotesque', sans-serif;
+	font-size: 8rem;
+
+}
+
+
+.section1, .section2
+{
+	width: 100%;
+	min-height: 100vh;
+	position: relative;
+	transform-style: preserve-3d;
+}
+
+.section1:before
+{
+	content: "";
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: url(bg.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	transform: translateZ(-1px) scale(2.1);
+	filter: blur(1px);
+	filter: brightness(.56);
+}
+
+
+.section2
+{
+	background: #191919;
+}
+
+div .text1 p
+{
+	font-family: 'Ygro', sans-serif;
+	color: white;	
+}
+
+
+/* ---- Navbar ---- */
+
+
+header
+{	
+	background-color: transparent;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	transition: background-color 0.4s ease-in-out;
+	padding: 20px 100px;
+	z-index: 100000;
+}
+
+header ul
+{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	text-align: center;
+}
+
+
+header ul li
+{
+	position: relative;
+	list-style: none;
+
+}
+
+
+header ul li a
+{
+	position: relative;
+	margin: 0 15px;
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+	transition: color 0.4s ease-in-out;
+	text-transform: capitalize;
+	font-size: 1em;
+}
+
+header ul li a:hover
+{
+	color: #3F5D6F;
+}
+
+
+/* ---- About section ---- */
+
+
+.about
+{
+	height: 100vh;
+	width: 100%;
+	padding: 100px 0px;
+	background-color: #21313C;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.about-text h2
+{
+	font-size: 3em;
+	color: white;
+	font-family: 'Grotesque', sans-serif;
+}
+
+.main
+{
+	height: 100vh;
+  width: 100vw;
+  background-color: #21313C;
+  margin: 0rem;
+  overflow: hidden;
+}
+
+
+#image-track 
+{
+  display: flex;
+  gap: 4vmin;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(0%, -50%); 
+  user-select: none; /* -- Prevent image highlighting -- */
+}
+
+#image-track > .image 
+{
+  width: 40vmin;
+  height: 56vmin;
+  object-fit: cover;
+  object-position: 100% center;
+  border: 2px solid white;
+  filter: brightness(.56);
+}
+

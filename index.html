@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page-Two</title>
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+
+	
+</head>
+<body>
+
+
+	<!---- Title --->
+
+
+	<div id="one" class="section1">
+
+		<div class="full-screen">
+			<h1 class="animate__animated animate__backInUp">Iceland</h1>
+		</div>
+	</div>
+	
+
+	
+	<!---- Body --->
+
+
+	<div class="section2">
+		<section id="two" class="about">
+			<div class="about-text">
+				<h2>Discover the destinations</h2>
+			</div>
+			<div class="main">
+				<div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
+					<img class="image" src="https://images.unsplash.com/photo-1528837516156-0a7225a43641?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1633&q=80" draggable="false" />
+					<img class="image" src="https://images.unsplash.com/photo-1503104538136-7491acef4d5d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" draggable="false" />
+					<img class="image" src="https://images.unsplash.com/photo-1520475178495-a8d5b36f1782?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1156&q=80" draggable="false" />
+					<img class="image" src="https://images.unsplash.com/photo-1494564605686-2e931f77a8e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" draggable="false" />
+					<img class="image" src="https://images.unsplash.com/photo-1498008122250-bcb854c8462d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" draggable="false" />
+					<img class="image" src="https://images.unsplash.com/photo-1547626740-02cb6aed9ef8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" draggable="false" />
+					<img class="image" src="https://images.unsplash.com/photo-1608468716860-5566b7671ea3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" draggable="false" />
+					<img class="image" src="https://images.unsplash.com/photo-1501879779179-4576bae71d8d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" draggable="false" />
+				</div>
+			</div>
+
+
+			<script>
+				const track = document.getElementById("image-track");
+
+				const handleOnDown = e => track.dataset.mouseDownAt = e.clientX;
+
+				const handleOnUp = () => {
+				  track.dataset.mouseDownAt = "0";  
+				  track.dataset.prevPercentage = track.dataset.percentage;
+				}
+
+				const handleOnMove = e => {
+				  if(track.dataset.mouseDownAt === "0") return;
+				  
+				  const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
+				        maxDelta = window.innerWidth / 2;
+				  
+				  const percentage = (mouseDelta / maxDelta) * -100,
+				        nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
+				        nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
+				  
+				  track.dataset.percentage = nextPercentage;
+				  
+				  track.animate({
+				    transform: `translate(${nextPercentage}%, -50%)`
+				  }, { duration: 1200, fill: "forwards" });
+				  
+				  for(const image of track.getElementsByClassName("image")) {
+				    image.animate({
+				      objectPosition: `${100 + nextPercentage}% center`
+				    }, { duration: 1200, fill: "forwards" });
+				  }
+				}
+
+				/* -- Had to add extra lines for touch events -- */
+
+				window.onmousedown = e => handleOnDown(e);
+
+				window.ontouchstart = e => handleOnDown(e.touches[0]);
+
+				window.onmouseup = e => handleOnUp(e);
+
+				window.ontouchend = e => handleOnUp(e.touches[0]);
+
+				window.onmousemove = e => handleOnMove(e);
+
+				window.ontouchmove = e => handleOnMove(e.touches[0]);
+			</script>
+		</section>
+	</div>
+	
+
+	<!---- Contact section ---->
+
+
+	<div id="three" class="container">
+		<div class="contact-box">
+			<div class="right">
+				<h2>Contact Us</h2>
+				<input type="text" class="field" placeholder="Your Name">
+				<input type="email" class="field" placeholder="Your Email">
+				<input type="text" class="field" placeholder="Your Phone">
+				<textarea class="field area" placeholder="Message"></textarea>
+				<button class="btn">Send</button>
+			</div>
+		</div>
+
+		<footer>
+			<h1>Powered by Anton</h1>
+		</footer>
+	</div>
+	
+
+
+	<!---- Navbar ---->
+
+
+	<div class="container-nav">
+      <div class="menu-container animate__animated animate__backInDown">
+        <div class="menu">
+          <div class="menu-shrink">
+            <div class="menu-left">
+              <div class="menu-brand">Iceland</div>
+            </div>
+            <div class="menu-center">
+              <a href="#one">Home</a>
+              <a href="#two">Places</a>
+              <a href="#three">Daily News</a>
+            </div>
+            <div class="menu-right">
+              <a href="#">Search</a>
+            </div>
+          </div>
+      	</div>
+   	  </div>
+   	</div>
+
+
+
+</body>
+</html>
